@@ -16,6 +16,14 @@ namespace Collisions_with_Circular_Hitboxes
         public float Radius { get; set; }
 
         // Vector of top left bound for drawing the texture
+        public Rectangle DrawRect
+        {
+            get
+            {
+                return new Rectangle((int)(Center.X - Radius), (int)(Center.Y - Radius), (int)Radius * 2, (int)Radius * 2);
+            }
+        }
+
         public Vector2 DrawLocation
         {
             get
@@ -35,9 +43,16 @@ namespace Collisions_with_Circular_Hitboxes
             return ((point - Center).Length() <= Radius);
         }
 
-        public bool Intersects(Circle other)
+        public bool Contains(Circle other)
         {
             return ((other.Center - Center).Length() < (other.Radius - Radius));
+        }
+
+
+
+        public bool Intersects(Circle other)
+        {
+            return ((other.Center - Center).Length() < (other.Radius + Radius));
         }
 
     }
