@@ -66,21 +66,26 @@ namespace Collisions_with_Circular_Hitboxes
 
         protected override void Update(GameTime gameTime)
         {
-            mouseState = Mouse.GetState();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            fireBallCircle.Center = mouseState.Position.ToVector2();
-
-            if (fireBallCircle.Intersects(bushCircle))
-                bushDrawTexture = fireTexture;
-
-            if (fireBallCircle.Contains(resetButtonCircle) && mouseState.LeftButton == ButtonState.Pressed)
-                bushDrawTexture = bushTexture;
-
 
             // TODO: Add your update logic here
 
+            mouseState = Mouse.GetState();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            // Centers the fireball around the mouse coordinate
+            fireBallCircle.Center = mouseState.Position.ToVector2();
+
+
+            // If the fireball touches the bush, light it on fire
+            if (fireBallCircle.Intersects(bushCircle))
+                bushDrawTexture = fireTexture;
+
+            // If user clicks on the Reset button while the fireball is completley in it the bush is restored 
+            if (fireBallCircle.Contains(resetButtonCircle) && mouseState.LeftButton == ButtonState.Pressed)
+                bushDrawTexture = bushTexture;
+           
             base.Update(gameTime);
         }
 
