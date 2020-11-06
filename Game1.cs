@@ -39,7 +39,6 @@ namespace Collisions_with_Circular_Hitboxes
 
             base.Initialize();
 
-
         }
 
         protected override void LoadContent()
@@ -49,24 +48,20 @@ namespace Collisions_with_Circular_Hitboxes
             // TODO: use this.Content to load your game content here
 
             fireballTexture = Content.Load<Texture2D>("fireball");
-            fireBallCircle = new Circle(new Vector2(0, 0), 25f);
+            fireBallCircle = new Circle(new Vector2(0, 0), 25f);   
 
             resetButtonTexture = Content.Load<Texture2D>("reset_button");
             resetButtonCircle = new Circle(new Vector2(50, 50), 50f);
             
             bushTexture = Content.Load<Texture2D>("circle_bush");
-            bushDrawTexture = bushTexture;
-            bushCircle = new Circle(new Vector2(400, 240), 75);
+            bushDrawTexture = bushTexture;      // This texture will be used for drawing.
+            bushCircle = new Circle(new Vector2(400, 240), 75f);
 
             fireTexture = Content.Load<Texture2D>("fire");
-         
-
-
         }
 
         protected override void Update(GameTime gameTime)
         {
-
             // TODO: Add your update logic here
 
             mouseState = Mouse.GetState();
@@ -97,6 +92,7 @@ namespace Collisions_with_Circular_Hitboxes
 
             _spriteBatch.Begin();
 
+            // Since all textures need to be scaled, the DrawRect property of circle was required.  
             _spriteBatch.Draw(resetButtonTexture, resetButtonCircle.DrawRect, Color.White);
             _spriteBatch.Draw(bushDrawTexture, bushCircle.DrawRect, Color.White);
             _spriteBatch.Draw(fireballTexture, fireBallCircle.DrawRect, Color.White);
